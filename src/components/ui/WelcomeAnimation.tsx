@@ -18,10 +18,10 @@ export const WelcomeAnimation = () => {
         // Set flag so it doesn't play again
         sessionStorage.setItem("sirocco_welcome_played", "true");
 
-        // Hide animation after 3 seconds
+        // Hide animation after 2.5 seconds (faster page access)
         const timer = setTimeout(() => {
             setShowAnimation(false);
-        }, 3500);
+        }, 2500);
 
         return () => clearTimeout(timer);
     }, []);
@@ -32,7 +32,7 @@ export const WelcomeAnimation = () => {
                 <motion.div
                     className="fixed inset-0 z-[100] flex items-center justify-center bg-black"
                     initial={{ opacity: 1 }}
-                    exit={{ opacity: 0, transition: { duration: 0.8, ease: "easeInOut" } }}
+                    exit={{ opacity: 0, transition: { duration: 0.5, ease: "easeInOut" } }}
                 >
                     <motion.div
                         initial={{ opacity: 0, scale: 0.8 }}

@@ -66,7 +66,7 @@ export default function GalleryPage() {
                 <div className="container mx-auto px-4">
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                         {images.map((img, index) => (
-                            <Reveal key={index} delay={index * 0.1}>
+                            <Reveal key={index} delay={Math.min(index * 0.1, 0.3)}>
                                 <div
                                     className="relative aspect-square cursor-pointer overflow-hidden group rounded-lg shadow-md hover:shadow-2xl hover:shadow-primary/20 transition-all duration-500"
                                     onClick={() => setSelectedImage(img.src)}
@@ -76,6 +76,7 @@ export default function GalleryPage() {
                                         alt={img.alt}
                                         fill
                                         loading="lazy"
+                                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                                         className="object-cover transition-transform duration-500 group-hover:scale-110"
                                     />
                                     <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">

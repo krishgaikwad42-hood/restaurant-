@@ -11,9 +11,9 @@ interface RevealProps {
     className?: string;
 }
 
-export const Reveal = ({ children, width = "100%", delay = 0, duration = 0.5, className = "" }: RevealProps) => {
+export const Reveal = ({ children, width = "100%", delay = 0, duration = 0.4, className = "" }: RevealProps) => {
     const ref = useRef(null);
-    const isInView = useInView(ref, { once: true, margin: "-75px" });
+    const isInView = useInView(ref, { once: true, margin: "-50px" });
     const mainControls = useAnimation();
 
     useEffect(() => {
@@ -26,12 +26,12 @@ export const Reveal = ({ children, width = "100%", delay = 0, duration = 0.5, cl
         <div ref={ref} style={{ position: "relative", width }} className={className}>
             <motion.div
                 variants={{
-                    hidden: { opacity: 0, y: 50 },
+                    hidden: { opacity: 0, y: 24 },
                     visible: { opacity: 1, y: 0 },
                 }}
                 initial="hidden"
                 animate={mainControls}
-                transition={{ duration: duration, delay: delay, ease: "easeOut" }}
+                transition={{ duration: duration, delay: Math.min(delay, 0.4), ease: [0.25, 0.46, 0.45, 0.94] }}
                 style={{ willChange: "transform, opacity" }}
             >
                 {children}

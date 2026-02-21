@@ -46,10 +46,17 @@ export const Footer = () => {
                         <Reveal delay={0.1}>
                             <h3 className="text-xl font-serif font-bold mb-8 text-white">Explore</h3>
                             <ul className="space-y-4 text-gray-400">
-                                {['Menu', 'Reservations', 'Private Dining', 'About Us', 'Contact'].map((item) => (
-                                    <li key={item}>
-                                        <Link href={`/${item.toLowerCase().replace(' ', '-')}`} className="hover:text-primary hover:pl-2 transition-all duration-300 inline-block">
-                                            {item}
+                                {[
+                                    { label: 'Menu', href: '/menu' },
+                                    { label: 'Reservations', href: '/reservations' },
+                                    { label: 'Private Dining', href: '/reservations#private' },
+                                    { label: 'About Us', href: '/about' },
+                                    { label: 'Gallery', href: '/gallery' },
+                                    { label: 'Contact', href: '/contact' },
+                                ].map((item) => (
+                                    <li key={item.label}>
+                                        <Link href={item.href} className="hover:text-primary hover:pl-2 transition-all duration-300 inline-block">
+                                            {item.label}
                                         </Link>
                                     </li>
                                 ))}

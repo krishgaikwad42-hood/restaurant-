@@ -21,12 +21,39 @@
   --font-serif: var(--font-playfair);
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   background: linear-gradient(to bottom, #0B0B0B, #111111);
   color: var(--foreground);
   font-family: var(--font-sans), Arial, Helvetica, sans-serif;
   min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* Safari momentum scrolling */
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-y: none;
 }
+
+/* Ensure buttons always show pointer cursor */
+button,
+[role="button"] {
+  cursor: pointer;
+}
+
+/* Selection color */
+::selection {
+  background: rgba(212, 175, 55, 0.3);
+  color: #fff;
+}
+
+/* iOS Safari tap highlight removal */
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
 
 /* Custom Scrollbar */
 ::-webkit-scrollbar {

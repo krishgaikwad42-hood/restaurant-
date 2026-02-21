@@ -5,16 +5,25 @@ import Image from "next/image";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/Button";
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 
 export const Hero = () => {
     const ref = useRef(null);
+    const [isMobile, setIsMobile] = useState(false);
+
+    useEffect(() => {
+        const check = () => setIsMobile(window.innerWidth < 768);
+        check();
+        window.addEventListener('resize', check);
+        return () => window.removeEventListener('resize', check);
+    }, []);
+
     const { scrollYProgress } = useScroll({
         target: ref,
         offset: ["start start", "end start"],
     });
 
-    const y = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
+    const y = useTransform(scrollYProgress, [0, 1], ["0%", isMobile ? "20%" : "50%"]);
     const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
 
     return (
@@ -24,29 +33,41 @@ export const Hero = () => {
                 style={{ y, willChange: "transform" }}
                 className="absolute inset-0 z-0"
             >
-                {/* Subtle Zoom Animation */}
-                <motion.div
-                    initial={{ scale: 1 }}
-                    animate={{ scale: 1.1 }}
-                    transition={{
-                        duration: 20,
-                        repeat: Infinity,
-                        repeatType: "reverse",
-                        ease: "linear"
-                    }}
-                    className="relative w-full h-full"
-                    style={{ willChange: "transform" }}
-                >
-                    <Image
-                        // High-quality dark food background (Fine dining plate)
-                        src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?q=80&w=1200&auto=format&fit=crop"
-                        alt="Exquisite Dining Experience"
-                        fill
-                        className="object-cover opacity-80"
-                        priority
-                        sizes="100vw"
-                    />
-                </motion.div>
+                {/* Ken Burns Zoom — Desktop only, static on mobile for performance */}
+                {!isMobile ? (
+                    <motion.div
+                        initial={{ scale: 1 }}
+                        animate={{ scale: 1.08 }}
+                        transition={{
+                            duration: 20,
+                            repeat: Infinity,
+                            repeatType: "reverse",
+                            ease: "linear"
+                        }}
+                        className="relative w-full h-full"
+                        style={{ willChange: "transform" }}
+                    >
+                        <Image
+                            src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?q=80&w=1920&auto=format&fit=crop"
+                            alt="Exquisite Dining Experience"
+                            fill
+                            className="object-cover opacity-80"
+                            priority
+                            sizes="100vw"
+                        />
+                    </motion.div>
+                ) : (
+                    <div className="relative w-full h-full">
+                        <Image
+                            src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?q=80&w=828&auto=format&fit=crop"
+                            alt="Exquisite Dining Experience"
+                            fill
+                            className="object-cover opacity-80"
+                            priority
+                            sizes="100vw"
+                        />
+                    </div>
+                )}
             </motion.div>
 
             {/* Clean Gradient Overlay for Readability */}

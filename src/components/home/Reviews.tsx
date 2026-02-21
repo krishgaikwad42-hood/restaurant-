@@ -45,7 +45,7 @@ export const Reviews = () => {
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                     {reviews.map((review, index) => (
-                        <Reveal key={review.id} delay={index * 0.2}>
+                        <Reveal key={review.id} delay={Math.min(index * 0.15, 0.3)}>
                             <div
                                 className="bg-[#151515] backdrop-blur-sm p-8 rounded-xl border border-white/5 hover:border-primary/30 transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_10px_30px_rgba(0,0,0,0.5)] shadow-[0_5px_15px_rgba(0,0,0,0.2)] relative group"
                                 style={{ willChange: "transform, box-shadow" }}

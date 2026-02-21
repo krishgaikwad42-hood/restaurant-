@@ -139,7 +139,7 @@ export default function MenuPage() {
                     className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10"
                 >
                     {filteredItems.map((item, index) => (
-                        <Reveal key={item.id} delay={index * 0.1}>
+                        <Reveal key={item.id} delay={Math.min(index * 0.08, 0.3)}>
                             <MenuItem
                                 {...item}
                             />
